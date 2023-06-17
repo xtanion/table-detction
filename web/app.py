@@ -1,5 +1,5 @@
 import sys
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, send_file, Response
 from table_detection import ocr_image, filter_dataframe
 import json
 
@@ -12,7 +12,18 @@ app.config["SESSION_TYPE"] = "filesystem"
 
 @app.route('/results', methods=['GET', 'POST'])
 def results():
-   return render_template('result.html')
+   if request.method == 'POST':
+      print('postmethod')
+      if request.form['csv'] == 'download_csv':
+          print('downloading')
+          return send_file(
+            'static/js/final.csv',
+            mimetype='text/csv',
+            download_name='final.csv',
+            as_attachment=True
+         )
+   elif request.method == 'GET':
+      return render_template('result.html')
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -29,4 +40,4 @@ def upload():
 #    return render_template('output.html')
 
 if __name__=='__main__':
-    app.run(debug=True)
+   app.run(debug=True, port=6969)
