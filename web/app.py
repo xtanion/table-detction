@@ -23,7 +23,7 @@ def results():
             as_attachment=True
          )
    elif request.method == 'GET':
-      return render_template('result.html')
+      return render_template('table.html')
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -40,4 +40,4 @@ def upload():
 #    return render_template('output.html')
 
 if __name__=='__main__':
-   app.run(debug=True, port=6969)
+   app.run(debug=True, port=4000)

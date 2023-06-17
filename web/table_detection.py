@@ -75,7 +75,32 @@ def filter_dataframe(df=None):
             in_list.append(rows['text'])
             len_min = 0
         len_min += 1
+    
+    buff = 3
+    for i, row in enumerate(out_list):
+        if len(row) < len_max-buff:
+            out_list.pop(i)
 
     df_final = pd.DataFrame(out_list)
     df_final.to_csv('web/static/js/final.csv', encoding='utf-8')
+    modify_html(df_final)
 
+
+def modify_html(df):
+    html_string = '''
+    <html>
+        <head><title>HTML Pandas Dataframe with CSS</title></head>
+        <link rel="stylesheet" href="{link}">
+        <body>
+            <h1>Table from Image/Pdf</h1>
+            {table}
+        </body>
+    </html>.
+    '''
+
+    # OUTPUT AN HTML FILE
+    table=df.to_html(na_rep='huh', classes='mystyle')
+    with open('web/templates/table.html', 'w') as f:
+        f.write(html_string.format(table=table, link="{{ url_for('static', filename='css/style.css') }}"))
+
+filter_dataframe()
