@@ -133,6 +133,10 @@ def modify_html(df):
         <body>
             <h1>Table from Image/Pdf</h1>
             {table}
+            <form align="center" method="post">
+                <input type="submit" name="csv" value="Download Csv" class="btn btn-download">
+                <input type="submit" name="csv" value="Download Image" class="btn btn-download">
+            </form>
         </body>
     </html>.
     '''

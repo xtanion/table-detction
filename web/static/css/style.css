@@ -131,6 +131,12 @@ h6 a {
     opacity: 1
 }
 
+form {
+    margin: 10 auto;
+    padding: 10;
+    text-align: center;
+}
+
 button:focus {
     outline: none;
 }
@@ -147,7 +153,9 @@ p {
     margin: 0px;
     font-weight: 400;
     color: #2e2d2d;
-    font-size: 17px;
+    font-size: 14px;
+    align-items: center;
+    text-align: center;
     line-height: 24px;
 }
 
@@ -205,11 +213,21 @@ th {
 }
 
 .btn-custom {
-    margin-top: 20px;
+    margin-top: 10px;
     background-color: transparent !important;
-    border: 2px solid #ddd;
-    padding: 12px 40px;
-    font-size: 16px;
+    border: 2px solid #393939;
+    padding: 2px;
+    font-size: 14px;
+}
+
+.btn-download {
+    margin-top: 10px;
+    background-color: #212121;
+    border: 2px solid #676767;
+    border-radius: 5px;
+    color: #ffffff;
+    padding: 5px;
+    font-size: 12px;
 }
 
 .lead {

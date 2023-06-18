@@ -1,4 +1,4 @@
-from os.path import join
+from os.path import join, curdir
 from flask import Flask, render_template, request, redirect, url_for, send_file, Response
 from table_detection import crop_table, TEMP_DIR
 
@@ -13,14 +13,20 @@ app.config["SESSION_TYPE"] = "filesystem"
 def results():
    if request.method == 'POST':
       print('postmethod')
-      if request.form['csv'] == 'download_csv':
+      if request.form['csv'] == 'Download Csv':
           print('downloading')
+          path = join('.temp', 'final.csv')
           return send_file(
-            'static/js/final.csv',
-            mimetype='text/csv',
-            download_name='final.csv',
+            path,
             as_attachment=True
-         )
+      ) 
+      elif request.form['csv'] == 'Download Image':
+          print('downloading')
+          path = join('.temp', 'crop.png')
+          return send_file(
+            path,
+            as_attachment=True
+      )
    elif request.method == 'GET':
       return render_template('table.html')
 
@@ -41,4 +47,4 @@ def upload():
 #    return render_template('output.html')
 
 if __name__=='__main__':
-   app.run(debug=True, port=4230)
+   app.run(debug=True, port=4030)
