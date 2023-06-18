@@ -1,7 +1,6 @@
-import sys
+from os.path import join
 from flask import Flask, render_template, request, redirect, url_for, send_file, Response
-from table_detection import ocr_image, filter_dataframe
-import json
+from table_detection import crop_table, TEMP_DIR
 
 
 app=Flask(__name__)
@@ -31,7 +30,9 @@ def upload():
    if request.method == 'POST':
        if request.files:
            file = request.files["file"]
-           json_data = ocr_image(file)
+           path = join(TEMP_DIR, 'input.png')
+           file.save(path)
+           crop_table(path)
            return redirect(url_for('results'))
    return render_template('index.html')
 
@@ -40,4 +41,4 @@ def upload():
 #    return render_template('output.html')
 
 if __name__=='__main__':
-   app.run(debug=True, port=4000)
+   app.run(debug=True, port=4230)
